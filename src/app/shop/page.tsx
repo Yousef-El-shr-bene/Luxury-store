@@ -97,7 +97,7 @@ export default function ShopPage() {
         {filteredProducts.map((product,index) => (
                         <ProductCard
                         key={index}
-                        product={{...product,badge : product.category}}
+                        product={{...product, id: product.id.toString(), badge: product.category}}
                       />
         ))}
       </div>
