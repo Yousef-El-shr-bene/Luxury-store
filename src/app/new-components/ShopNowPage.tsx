@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import ProductCard from "./ProductCard";
@@ -117,7 +116,7 @@ export default function ShopNowPage() {
           filteredProducts.map((product, index) => (
               <ProductCard
               key={index}
-              product={{...product,badge : product.status}}
+              product={{...product,badge : product.status,discount: 0}}
             />
           ))
         ) : (

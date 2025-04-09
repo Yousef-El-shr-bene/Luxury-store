@@ -1,7 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export default function ProductCard({ product }: { product: any }) {
+interface Product {
+  id: string;
+  image: string;
+  name: string;
+  badge?: string;
+  category: string;
+  price: number;
+  discount?: number;
+  originalPrice?: number;
+}
+
+export default function ProductCard({ product }: { product: Product }) {
   return (
     <Link href={`/product/${product.id}`} className="group block rounded-2xl bg-white shadow-md overflow-hidden transition-all hover:shadow-lg">
       <div className="relative w-full h-64 overflow-hidden">

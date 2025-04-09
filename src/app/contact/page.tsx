@@ -3,7 +3,7 @@ import React from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { FaInstagram, FaFacebookF, FaTiktok, FaWhatsapp } from "react-icons/fa";
+import { FaInstagram, FaFacebookF, FaTiktok } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 export default function ContactPage() {

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Image from "next/image";
 export default function RelatedProducts() {
   return (
           <div className="md:col-span-2 mt-16">
@@ -10,7 +10,7 @@ export default function RelatedProducts() {
                 key={item}
                 className="border rounded-xl p-4 hover:shadow-xl transition duration-300"
               >
-                <img
+                <Image
                   src="/image123.png"
                   alt="Related Product"
                   className="rounded-lg mb-3"

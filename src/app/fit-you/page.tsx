@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { Separator } from '@/components/ui/separator';
-
+import Image from 'next/image';
 export default function FitYouPage() {
   return (
     <div className="bg-neutral-50 text-neutral-900">
@@ -32,17 +32,17 @@ export default function FitYouPage() {
         <h2 className="text-3xl font-semibold text-center mb-12 text-neutral-800">كيف يعمل Fit You؟</h2>
         <div className="grid md:grid-cols-3 gap-10 text-center">
           <motion.div whileHover={{ scale: 1.05 }} className="bg-white shadow-xl rounded-2xl p-8">
-            <img src="/fit-you/step1.png" alt="Step 1" className="mx-auto mb-4 w-24 h-24 object-contain" />
+            <Image src="/fit-you/step1.png" alt="Step 1" className="mx-auto mb-4 w-24 h-24 object-contain" />
             <h3 className="font-semibold text-xl mb-2 text-red-600">استلم قطعة القماش الخاصة بك</h3>
             <p className="text-neutral-600">تصلك قطعة Fabric Square مع طلبك لتجربة القياس الشخصي.</p>
           </motion.div>
           <motion.div whileHover={{ scale: 1.05 }} className="bg-white shadow-xl rounded-2xl p-8">
-            <img src="/fit-you/step2.png" alt="Step 2" className="mx-auto mb-4 w-24 h-24 object-contain" />
+            <Image src="/fit-you/step2.png" alt="Step 2" className="mx-auto mb-4 w-24 h-24 object-contain" />
             <h3 className="font-semibold text-xl mb-2 text-red-600">استخدم دليل الفيديو</h3>
             <p className="text-neutral-600">اتبع خطوات الدليل لقياس نفسك بكل سهولة ودقة.</p>
           </motion.div>
           <motion.div whileHover={{ scale: 1.05 }} className="bg-white shadow-xl rounded-2xl p-8">
-            <img src="/fit-you/step3.png" alt="Step 3" className="mx-auto mb-4 w-24 h-24 object-contain" />
+            <Image src="/fit-you/step3.png" alt="Step 3" className="mx-auto mb-4 object-contain" />
             <h3 className="font-semibold text-xl mb-2 text-red-600">شارك القياسات معنا</h3>
             <p className="text-neutral-600">أرسل لنا القياسات لتحصل على تصميم يفصَّل خصيصًا لك.</p>
           </motion.div>

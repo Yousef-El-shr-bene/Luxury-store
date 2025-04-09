@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
@@ -44,7 +45,7 @@ export default function CollectionHighlight() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: index * 0.2 }}
           >
-            <img
+            <Image
               src={item.image}
               alt={item.title}
               className="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500"

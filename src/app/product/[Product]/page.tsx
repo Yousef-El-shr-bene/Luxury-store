@@ -6,6 +6,7 @@ import { Star } from "lucide-react";
 import QuantitySelector from "./QuantitySelector";
 import ColorSelector from "./ColorSelector";
 import ProductCard from "../../new-components/ProductCard";
+import Image from "next/image";
 
 const product = {
   name: "Elegant Red Dress",
@@ -45,7 +46,7 @@ export default function ProductPage() {
         </div>
         <div className="flex mt-4 space-x-2">
           {product.images.map((img) => (
-            <img
+            <Image
               key={img}
               src={img}
               alt="Thumbnail"
@@ -89,14 +90,15 @@ export default function ProductPage() {
           <div className="grid grid-cols-2 gap-4">
             {[1, 2, 3, 4].map((item) => (
               <ProductCard
+              key={item}
               product={{
                 id: "product-1",
                 name: "فستان سهرة فاخر",
                 category: "فساتين",
                 image: "/image123.png",
-                price: "3200",
-                originalPrice: "4000",
-                discount: true,
+                price: 3200,
+                originalPrice: 4000,
+                discount: 0,
                 badge: "Limited",
               }}
             />

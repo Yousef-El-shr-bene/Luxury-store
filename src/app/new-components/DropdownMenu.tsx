@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
 import { Menu, X, ChevronDown } from 'lucide-react';
 
 export default function Navbar() {
