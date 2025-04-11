@@ -1,106 +1,97 @@
-"use client"
+"use client";
+
 import { useState } from "react";
+import  ProductCard from "@/app/new-components/ProductCard";
+import { products as productsData } from "./products"; // افترضنا عندك الداتا هنا
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
-import ProductCard from "../new-components/ProductCard";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
-const products = [
-  { id: 1, name: "Rose Gold Blazer", category: "Limited Edition", price: 250, image: "/image123.png" },
-  { id: 2, name: "Elegant White Dress", category: "Everyday Luxury", price: 180, image: "/image123.png" },
-  { id: 3, name: "Rare Red Gown", category: "Rare Drop", price: 500, image: "/image123.png" },
-  { id: 4, name: "Rose Gold Blazer2", category: "Limited Edition", price: 150, image: "/image123.png" },
-  { id: 5, name: "Elegant White Dress2", category: "Everyday Luxury", price: 280, image: "/image123.png" },
-  { id: 6, name: "Rare Red Gown2", category: "Rare Drop", price: 300, image: "/image123.png" },
-];
+export default function ProductsPage() {
+  const [filters, setFilters] = useState({
+    category: "",
+    type: "",
+    priceRange: [0, 10000],
+  });
+  const [visibleCount, setVisibleCount] = useState(6);
 
-export default function ShopPage() {
-  const [priceRange, setPriceRange] = useState([0, 600]);
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [sortOrder, setSortOrder] = useState("asc");
+  const filteredProducts = productsData.filter(product => {
+    const matchesCategory = filters.category ? product.category === filters.category : true;
+    const matchesType = filters.type ? product.rarity === filters.type : true;
+    const matchesPrice = product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1];
+    return matchesCategory && matchesType && matchesPrice;
+  });
 
-  const filteredProducts = products
-    .filter(
-      (product) =>
-        (selectedCategory === "All" || product.category === selectedCategory) &&
-        product.price >= priceRange[0] &&
-        product.price <= priceRange[1] &&
-        product.name.toLowerCase().includes(searchQuery.toLowerCase())
-    )
-    .sort((a, b) => (sortOrder === "asc" ? a.price - b.price : b.price - a.price));
+  const visibleProducts = filteredProducts.slice(0, visibleCount);
+
+  const loadMore = () => {
+    setVisibleCount(prev => prev + 6);
+  };
+
+  const resetFilters = () => {
+    setFilters({ category: "", type: "", priceRange: [0, 10000] });
+    setVisibleCount(6);
+  };
 
   return (
-    <div className="p-6 space-y-8">
-      {/* Promo Banner */}
-      <div className="bg-rose-100 text-rose-800 text-center py-2 rounded-xl text-sm">
-        Complimentary shipping on orders over $300
-      </div>
-
-      {/* Filters Section */}
-      <div className="flex flex-wrap gap-4 items-center">
-        {/* Category Filter */}
+    <div className="px-6 py-10 space-y-10 max-w-7xl mx-auto pt-32">
+      {/* الفلاتر */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <Input
+          placeholder="فستان / جيبه"
+          value={filters.category}
+          onChange={e => setFilters({ ...filters, category: e.target.value })}
+        />
+        <Input
+          placeholder="Luxe / Rare"
+          value={filters.type}
+          onChange={e => setFilters({ ...filters, type: e.target.value })}
+        />
         <div>
-          <label className="block text-sm mb-1">Category:</label>
-          <select
-            className="border rounded p-2"
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-          >
-            <option value="All">All</option>
-            <option value="Limited Edition">Limited Edition</option>
-            <option value="Rare Drop">Rare Drop</option>
-            <option value="Everyday Luxury">Everyday Luxury</option>
-          </select>
-        </div>
-
-        {/* Price Filter */}
-        <div className="w-48">
-          <label className="block text-sm mb-1">Price Range:</label>
+          <p className="mb-2 text-sm font-medium">نطاق السعر</p>
           <Slider
             min={0}
-            max={600}
-            step={10}
-            value={priceRange}
-            onValueChange={setPriceRange}
+            max={10000}
+            step={50}
+            defaultValue={filters.priceRange}
+            onValueChange={(value) => setFilters({ ...filters, priceRange: value })}
           />
-          <div className="text-xs text-gray-600 mt-1">
-            ${priceRange[0]} - ${priceRange[1]}
-          </div>
+          <p className="mt-1 text-xs text-muted-foreground">{filters.priceRange[0]} - {filters.priceRange[1]} EGP</p>
         </div>
-
-        {/* Sort Order */}
-        <div>
-          <label className="block text-sm mb-1">Sort by Price:</label>
-          <select
-            className="border rounded p-2"
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
-          >
-            <option value="asc">Low to High</option>
-            <option value="desc">High to Low</option>
-          </select>
-        </div>
-
-        {/* Search Bar */}
-        <div className="flex-1">
-          <label className="block text-sm mb-1">Search:</label>
-          <Input
-            placeholder="Search products..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
+        <Button onClick={resetFilters} variant="outline">إعادة تعيين</Button>
       </div>
 
-      {/* Product Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {filteredProducts.map((product,index) => (
-                        <ProductCard
-                        key={index}
-                        product={{...product, id: product.id.toString(), badge: product.category}}
-                      />
+      {/* المنتجات */}
+      <motion.div
+        layout
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
+        {visibleProducts.map((product: { id: string; catigory?: string; name?: string; price?: number; oldPrice?: number | undefined; image?: string; mainCategory?: string; rarity?: string; }) => (
+          <motion.div key={product.id} layout>
+            <ProductCard
+              product={{
+                id: String(product.id),
+                name: product.name ?? "",
+                price: product.price ?? 0,
+                oldPrice: product.oldPrice,
+                image: product.image ?? "",
+                mainCategory: product.catigory ?? "",
+                rarity: product.rarity ?? ""
+              }}
+            />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
+
+      {/* زر التحميل */}
+      {visibleCount < filteredProducts.length && (
+        <div className="flex justify-center mt-6">
+          <Button onClick={loadMore} variant="default" className="px-8 py-3 rounded-full">
+            تحميل المزيد
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

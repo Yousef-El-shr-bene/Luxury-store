@@ -49,6 +49,8 @@ export default function ProductPage() {
             <Image
               key={img}
               src={img}
+              width={80}
+              height={80} 
               alt="Thumbnail"
               className={`w-20 h-20 object-cover rounded-xl cursor-pointer border-2 ${selectedImage === img ? "border-red-500" : "border-transparent"}`}
               onClick={() => setSelectedImage(img)}
@@ -94,12 +96,11 @@ export default function ProductPage() {
               product={{
                 id: "product-1",
                 name: "فستان سهرة فاخر",
-                category: "فساتين",
+                mainCategory: "فساتين",
                 image: "/image123.png",
                 price: 3200,
-                originalPrice: 4000,
-                discount: 0,
-                badge: "Limited",
+                oldPrice: 4000,
+                rarity: "Limited",
               }}
             />
             ))}

@@ -48,6 +48,8 @@ export default function CollectionHighlight() {
             <Image
               src={item.image}
               alt={item.title}
+              width={500}
+              height={300}
               className="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500"
             />
             <div className="p-6 bg-white">
