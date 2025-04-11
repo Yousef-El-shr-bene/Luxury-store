@@ -112,11 +112,19 @@ export default function ShopNowPage() {
 
       {/* Product Grid */}
       <section className="px-6 pb-12 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-        {filteredProducts.length > 0 ? (
+          {filteredProducts.length > 0 ? (
           filteredProducts.map((product, index) => (
               <ProductCard
               key={index}
-              product={{...product,badge : product.status,discount: 0}}
+              product={{
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                image: product.image,
+                mainCategory: product.category,
+                rarity: product.status,
+                oldPrice: product.originalPrice > product.price ? product.originalPrice : undefined
+              }}
             />
           ))
         ) : (
