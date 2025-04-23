@@ -1,22 +1,17 @@
-// import React from "react";
-// import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-// import { DataTable } from "@/components/data-table";
-// import { columns } from "./columns";
-// import { getCustomers } from "@/lib/data";
+import { columns } from "./columns";
+// import { DataTable } from "@/components/ui/data-table";
+// import { getCustomers } from "../actions/customers";
 
 export default async function CustomersPage() {
-//   const customers = await getCustomers();
+  // const customers = await getCustomers();
 
   return (
-    <div className="flex-1 space-y-4 p-8 pt-6">
-      {/* <Card>
-        <CardHeader>
-          <CardTitle>العملاء</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <DataTable columns={columns} data={customers} searchKey="email" />
-        </CardContent>
-      </Card> */}
+    <div className="p-6 space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold">العملاء</h1>
+        <p className="text-muted-foreground text-sm">عرض وتحليل بيانات العملاء المسجلين في المتجر</p>
+      </div>
+      {/* <DataTable columns={columns} data={customers} /> */}
     </div>
   );
 }

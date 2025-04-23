@@ -27,7 +27,7 @@ interface ProductCardProps {product : {
   const hasDiscount = oldPrice && oldPrice > price;
 
   return (
-    <div className="group relative border rounded-2xl p-4 shadow-sm hover:shadow-lg transition-all duration-300 bg-white">
+    <div className="group relative border rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 bg-white">
       <Link href={`/product/${id}`}>
         <div className="relative w-full aspect-square overflow-hidden rounded-xl">
           <Image
@@ -50,7 +50,7 @@ interface ProductCardProps {product : {
           )}
         </div>
 
-        <div className="mt-4 space-y-1">
+        <div className="mt-4 space-y-1 p-4">
           <h3 className="text-lg font-semibold text-gray-900">{name}</h3>
 
           <p className="text-sm text-gray-500">{mainCategory}</p>
